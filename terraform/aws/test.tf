@@ -1,13 +1,13 @@
 resource "aws_instance" "web_host" {
   # ec2 have plain text secrets in user data
   ami           = "${var.ami}"
-  instance_type = "t2.nano"
+  instance_type = "t3.nano"
 
   vpc_security_group_ids = [
   "${aws_security_group.web-node.id}"]
   subnet_id = "${aws_subnet.web_subnet.id}"
   user_data = <<EOF
-#! /bin/bash
+#! /bin/bash 
 sudo apt-get update
 sudo apt-get install -y apache2
 sudo systemctl start apache2
